@@ -1,0 +1,39 @@
+const User = require("../models/user");
+const db = require("../db");
+const userInstance = new User();
+module.exports = class UserService {
+    
+
+    //Get all user
+    async get(data) {
+        try {
+            const { id } = data;
+            const user = userInstance.findById(id);
+
+            if (!user) {
+                throw createError(404, 'User record not found');
+            }
+    
+            return user;
+
+        } catch(err) {
+            throw err;
+        }
+    }
+    
+    //update user
+    async update(data) {
+        try {
+            const user = userInstance.update(data);
+            if (!user) {
+                throw createError(404, 'User record not found');
+            }
+    
+            return user;
+
+        } catch(err) {
+            throw err;
+        }
+    }
+
+}
